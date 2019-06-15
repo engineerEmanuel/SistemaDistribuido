@@ -146,15 +146,12 @@ server.get('/positions.json',(req, res, next)=>{
 });
 
 
-server.get('/postions/:id',(req, res, next)=>{
-	// body parser
+server.get('/postions/:id.json',(req, res, next)=>{
 	const { id } = req.params;
-	console.log(req.query)
-
-	console.log(description, location, full_time);
 
 	knex('emprego')
 	.where('idEmprego',id)
+	.first()
 	.then((dados) => {
 		if(!dados) return res.send(new errs.BadRequestError('nenhum registro encontrado'));
 		res.send(dados);
